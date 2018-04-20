@@ -128,3 +128,5 @@
     showInventory(chooseProduct);
   });
 })();
+
+//improvement... make a class for product which can export methods like showInventory.  Keep this file just the interface.
