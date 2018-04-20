@@ -53,7 +53,7 @@
   function getProductInfo(id, func) {
     var query = "SELECT * FROM products WHERE ?";
     connection.query(query, {
-        item_id: id,
+        item_id: id
       },
       function (err, results) {
         if (err) throw err;
@@ -74,13 +74,13 @@
       .prompt({
         name: "quantity",
         type: "input",
-        message: "How many " + productName + " do you want to buy?",
+        message: "How many " + productName + "'(s) do you want to buy?",
         validate: function (value) {
           if (!isNaN(value)) {
             if (value <= stockQuantity){
               return true;
             } else {
-              return "pick a number that is less than the stock quantity of " + stockQuantity;
+              return "We don't have that many. Select a number less than the stock quantity of " + stockQuantity;
             }
           }
           return "pick a number!";
@@ -88,28 +88,35 @@
       })
       .then(function (answer) {
         var quantity = answer.quantity;
-        console.log(quantity);
-        console.log(itemId);
-        purchase(itemId, quantity, stockQuantity, productName);
+        purchase(productObj, quantity);
       });
   }
 
 
-  function purchase(id, quantity, stock, name) {
+  function purchase(productObj, quantity) {
     //make the purchase and update quantities in the database
-    var newQuantity = stock - quantity;
+    var productName = productObj.product_name;
+    var itemId = productObj.item_id;
+    var stockQuantity = productObj.stock_quantity;
+    var price = productObj.price;
+
+    var newQuantity = stockQuantity - quantity;
+    var total = price*quantity;
+    total = total.toFixed(2);
+
     var query = "UPDATE products SET ? WHERE ?";
     connection.query(query, [
     {
       stock_quantity: newQuantity
     },
     {
-      item_id: id
+      item_id: itemId
     }
   ],
     function(err, results){
       if (err) throw err;
-      console.log("you have purchased " + quantity + " from " + name);
+      console.log("Purchased - Quantity: " + quantity + " - Item: " + productName);
+      console.log("Total Cost:  $" + total);
       console.log("==================================");
     })
     showInventory(chooseProduct);
