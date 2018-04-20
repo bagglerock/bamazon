@@ -65,6 +65,7 @@
 
 
   function selectQuantity(productObj) {
+
     var productName = productObj.product_name;
     var itemId = productObj.item_id;
     var stockQuantity = productObj.stock_quantity;
@@ -76,17 +77,42 @@
         message: "How many " + productName + " do you want to buy?",
         validate: function (value) {
           if (!isNaN(value)) {
-            return true;
+            if (value <= stockQuantity){
+              return true;
+            } else {
+              return "pick a number that is less than the stock quantity of " + stockQuantity;
+            }
           }
           return "pick a number!";
         }
       })
-      .then(function (answer) {});
+      .then(function (answer) {
+        var quantity = answer.quantity;
+        console.log(quantity);
+        console.log(itemId);
+        purchase(itemId, quantity, stockQuantity, productName);
+      });
   }
 
 
-  function purchase(id, quantity) {
+  function purchase(id, quantity, stock, name) {
     //make the purchase and update quantities in the database
+    var newQuantity = stock - quantity;
+    var query = "UPDATE products SET ? WHERE ?";
+    connection.query(query, [
+    {
+      stock_quantity: newQuantity
+    },
+    {
+      item_id: id
+    }
+  ],
+    function(err, results){
+      if (err) throw err;
+      console.log("you have purchased " + quantity + " from " + name);
+      console.log("==================================");
+    })
+    showInventory(chooseProduct);
   }
 
   connection.connect(function (err) {
