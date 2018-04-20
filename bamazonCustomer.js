@@ -95,15 +95,22 @@
     var itemId = productObj.item_id;
     var stockQuantity = productObj.stock_quantity;
     var price = productObj.price;
+    var sales = productObj.sales;
+
+    if (isNaN(sales)){
+      sales = 0;
+    }
 
     var newQuantity = stockQuantity - quantity;
     var total = price*quantity;
     total = total.toFixed(2);
-
+    var totalSales = parseInt(sales) + parseInt(total);
+    totalSales = totalSales.toFixed(2);
     var query = "UPDATE products SET ? WHERE ?";
     connection.query(query, [
     {
-      stock_quantity: newQuantity
+      stock_quantity: newQuantity,
+      product_sales: totalSales
     },
     {
       item_id: itemId
@@ -113,6 +120,7 @@
       if (err) throw err;
       console.log("Purchased - Quantity: " + quantity + " - Item: " + productName);
       console.log("Total Cost:  $" + total);
+      console.log("Total Sales of this item: $" + totalSales);
       console.log("==================================");
     })
     showInventory(chooseProduct);

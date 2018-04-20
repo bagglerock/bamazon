@@ -44,6 +44,10 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("55-inch OLED TV", "Electronics", 499.99, 30);
 
 
+// this adds a new table called departments
+
+
+
 USE bamazon;
 
 CREATE TABLE departments (
@@ -53,3 +57,18 @@ CREATE TABLE departments (
 
   PRIMARY KEY (department_id)
 );
+
+//this adds a new column to products
+
+USE bamazon;
+
+ALTER TABLE products
+ADD product_sales DECIMAL(10,4);
+
+
+
+// removes the new column
+
+USE bamazon;
+ALTER TABLE products
+DROP COLUMN product_sales;
