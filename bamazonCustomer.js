@@ -45,7 +45,6 @@
       })
       .then(function (answer) {
         var id = answer.id;
-        //first make a function to check the quantity
         getProductInfo(id, selectQuantity);
       });
   }
@@ -57,9 +56,7 @@
       },
       function (err, results) {
         if (err) throw err;
-        //returns the product info as an object for the next function
         func(results[0]);
-        //func();
       })
   }
 
@@ -94,7 +91,6 @@
 
 
   function purchase(productObj, quantity) {
-    //make the purchase and update quantities in the database
     var productName = productObj.product_name;
     var itemId = productObj.item_id;
     var stockQuantity = productObj.stock_quantity;
@@ -130,3 +126,5 @@
 })();
 
 //improvement... make a class for product which can export methods like showInventory.  Keep this file just the interface.
+//change stuff around and make this file to be the interface
+//make a product class or maybe the inventory class that holds the methods like adding and subtracting a product
