@@ -21,6 +21,71 @@
         "Create New Department"
       ];
 
+      function start() {
+        inquirer
+          .prompt({
+            name: "command",
+            type: "rawlist",
+            message: "What would you like to do?",
+            choices: choices
+          })
+          .then(function(answer) {
+            if (answer.command === "View Product Sales by Department") {
+              showSales(start);
+            } else if (answer.command === "Create New Department") {
+              createNewDepartment();
+            } else {
+              console.log("something happened");
+              start();
+              //something wrong happened
+            }
+          });
+      }
+
+
+      function showSales(func){
+          //involves some join stuff and an alias and group.... shrug... read it later
+
+          func();
+      }
+
+      function createNewDepartment(){
+        inquirer
+        .prompt([
+          {
+            name: "name",
+            type: "input",
+            message: "What is the name of the department you would like to add?"
+          },
+          {
+            name: "overhead",
+            type: "input",
+            message: "What are the overhead costs?",
+            validate: function(value) {
+              if (!isNaN(value)) {
+                return true;
+              }
+              return false;
+            }
+          }
+        ])
+        .then(function(answer) {
+          // when finished prompting, insert a new item into the db with that info
+          connection.query(
+            "INSERT INTO departments SET ?",
+            {
+              department_name: answer.name,
+              overhead_costs: answer.overhead
+            },
+            function(err) {
+              if (err) throw err;
+              console.log("Your department was added successfully!");
+              // re-prompt the user for if they want to bid or post
+              showSales(start);
+            }
+          );
+        });
+      }
 
 
 
