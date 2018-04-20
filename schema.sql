@@ -42,3 +42,14 @@ VALUES ("Bluetooth receiver", "Electronics", 49.99, 32);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("55-inch OLED TV", "Electronics", 499.99, 30);
+
+
+USE bamazon;
+
+CREATE TABLE departments (
+  department_id INT NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR(150) NULL,
+  overhead_costs DECIMAL(10,4) NULL,
+
+  PRIMARY KEY (department_id)
+);
