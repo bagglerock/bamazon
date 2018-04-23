@@ -1,3 +1,6 @@
+//****  COPY THIS PART TO MAKE THE DATABASE AND INSERT 10 items **///
+
+
 DROP DATABASE IF EXISTS bamazon;
 CREATE DATABASE bamazon;
 
@@ -44,12 +47,6 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("55-inch OLED TV", "Electronics", 499.99, 30);
 
 
-// this adds a new table called departments
-
-
-
-USE bamazon;
-
 CREATE TABLE departments (
   department_id INT NOT NULL AUTO_INCREMENT,
   department_name VARCHAR(150) NULL,
@@ -58,17 +55,8 @@ CREATE TABLE departments (
   PRIMARY KEY (department_id)
 );
 
-//this adds a new column to products
-
 USE bamazon;
 
 ALTER TABLE products
 ADD product_sales DECIMAL(10,4);
 
-
-
-// removes the new column
-
-USE bamazon;
-ALTER TABLE products
-DROP COLUMN product_sales;
