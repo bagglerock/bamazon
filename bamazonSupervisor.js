@@ -48,7 +48,7 @@
     products.product_sales-departments.overhead_costs AS "Total Profit"
     FROM
     departments
-    LEFT JOIN products ON departments.department_id = products.item_id
+    LEFT JOIN products ON departments.department_name = products.department_name
     GROUP BY
     departments.department_name
     ORDER BY department_id;`;

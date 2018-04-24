@@ -95,7 +95,7 @@
     var itemId = productObj.item_id;
     var stockQuantity = productObj.stock_quantity;
     var price = productObj.price;
-    var sales = productObj.sales;
+    var sales = productObj.product_sales;
 
     if (isNaN(sales)){
       sales = 0;
