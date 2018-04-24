@@ -39,7 +39,20 @@
   }
 
   function showSales(func) {
-    var query = "SELECT department_id AS ID, department_name AS Department, overhead_costs AS Overhead FROM departments";
+    var query = `
+    SELECT
+    departments.department_id AS ID,
+    departments.department_name AS "Department Name",
+    departments.overhead_costs AS Overhead,
+    SUM(products.product_sales) AS Sales,
+    products.product_sales-departments.overhead_costs AS "Total Profit"
+    FROM
+    departments
+    LEFT JOIN products ON departments.department_id = products.item_id
+    GROUP BY
+    departments.department_name
+    ORDER BY department_id;`;
+
     connection.query(query, function(err, results) {
       if (err) throw err;
       console.log(asTable(results));
