@@ -39,7 +39,7 @@
   }
 
   function showSales(func) {
-    var query = "SELECT * FROM departments";
+    var query = "SELECT department_id AS ID, department_name AS Department, overhead_costs AS Overhead FROM departments";
     connection.query(query, function(err, results) {
       if (err) throw err;
       console.log(asTable(results));

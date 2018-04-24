@@ -48,7 +48,7 @@
   }
 
   function showInventory(func) {
-    var query = "SELECT * FROM products";
+    var query = "SELECT item_id AS ID, product_name AS Name, department_name AS Department, price AS PPU, stock_quantity AS QTY, product_sales AS Sales FROM products";
     connection.query(query, function(err, results) {
       if (err) throw err;
       console.log(asTable(results));
@@ -57,7 +57,7 @@
   }
 
   function viewLowInventory(func) {
-    var query = "SELECT * FROM products WHERE stock_quantity < 6";
+    var query = "SELECT item_id AS ID, product_name AS Name, department_name AS Department, price AS PPU, stock_quantity AS QTY, product_sales AS Sales FROM products WHERE stock_quantity < 6";
     connection.query(query, function(err, results) {
       if (err) throw err;
       console.log(asTable(results));
