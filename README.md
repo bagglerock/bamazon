@@ -15,3 +15,9 @@ Commands:
 - "node bamazonCustomer" -->  Buyer can see the items for purchase and make a purchase.
 - "node bamazonManager" --> Can view products for sale, view inventory lower than 5 items, add to inventory, add a new product.
 - "node bamazonSupervisor" --> View Product Sales by Department, Can add new departments
+
+![alt text](https://github.com/bagglerock/bamazon/blob/master/previews/bamazonCustomer.gif?raw=true "bamazonCustomer.js example")
+
+![alt text](https://github.com/bagglerock/bamazon/blob/master/previews/bamazonManager.gif?raw=true "bamazonCustomer.js example")
+
+![alt text](https://github.com/bagglerock/bamazon/blob/master/previews/bamazonSupervisor.gif?raw=true "bamazonCustomer.js example")
